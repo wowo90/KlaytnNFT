@@ -9,7 +9,7 @@ import pinataSDK from '@pinata/sdk';
 import * as DataFile from '../api/DataFile';
 
 import { create } from "ipfs-http-client";
-import kipAbi from "../../src/kipAbi";
+import kip17Abi from "./kip17Abi";
 
 const PinataApiKey = "5f18d53d45731d696c5c";
 const PinataSecretApiKey = "c9a7120e9fdf70a226e1e1c7415dce35dc8fd2da007c06b5593007042c729e00";
@@ -107,7 +107,7 @@ export default function CreateNFT({ caver, newKip17addr }) {
 
     const account = window.sessionStorage.getItem('ID');
 
-    tokenContract = await new caver.klay.Contract(kipAbi, newKip17addr, {
+    tokenContract = await new caver.klay.Contract(kip17Abi, newKip17addr, {
       from: account,
     });
 
