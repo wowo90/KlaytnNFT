@@ -9,7 +9,7 @@ import pinataSDK from '@pinata/sdk';
 import * as DataFile from '../api/DataFile';
 
 import { create } from "ipfs-http-client";
-import kip17Abi from "./kip17Abi";
+import kip17Abi from "../../components/kip17Abi";
 
 const PinataApiKey = "5f18d53d45731d696c5c";
 const PinataSecretApiKey = "c9a7120e9fdf70a226e1e1c7415dce35dc8fd2da007c06b5593007042c729e00";
