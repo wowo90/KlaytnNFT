@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import MainTitle from "../MainTitle";
-import FireBaseInit from '../FireBase/FireBaseInit';
+import FireBaseInit from '../../components/FireBaseInit';
 import pinataSDK from '@pinata/sdk';
 
 const NFTItemInfo = () => {

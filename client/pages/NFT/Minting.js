@@ -4,7 +4,7 @@ import MainTitle from "../MainTitle";
 
 import Mystyles from "../../styles/mynft.module.css";
 
-import FireBaseInit from '../FireBase/FireBaseInit';
+import FireBaseInit from '../../components/FireBaseInit';
 import pinataSDK from '@pinata/sdk';
 import * as DataFile from '../api/DataFile';
 
@@ -51,6 +51,8 @@ export default function CreateNFT({ caver, newKip17addr }) {
 
   const onChange = async (e) => 
   {   
+    
+    /*//임시로막아두자! 
     const file = e.target.files[0];
     const createURL = URL.createObjectURL(file);
 
@@ -73,6 +75,7 @@ export default function CreateNFT({ caver, newKip17addr }) {
     {
         console.log(err);
     });
+    */
     
     /*
     const client = create("https://ipfs.infura.io:5001/api/v0");

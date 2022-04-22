@@ -62,7 +62,7 @@ const MainTitle = () => {
                             <div className={Title.MainMenu}><Link href="/">Home</Link></div>
                             <div className={Title.MainMenu}><Link href="/">SoonSoon Notice</Link></div>
                             <div className={Title.MainMenu}><Link href="/Script/Community">Community</Link></div>
-                            <div className={Title.MainMenu}><Link href="/NFT/mynft">NFT Event</Link></div>
+                            <div className={Title.MainMenu}><Link href="/NFT/Mynft">NFT Event</Link></div>
                             <div className={Title.MainMenu}><Link href="/NFT/Minting">NFT Minting</Link></div>
                             <div className={Title.MainMenu}><Link href="/NFT/NFTItemInfo">USE NFT</Link></div>
                             
