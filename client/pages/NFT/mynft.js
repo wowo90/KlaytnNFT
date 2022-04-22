@@ -149,7 +149,7 @@ const Mynft = ({ caver, newKip17addr }) => {
       <MainTitle />
       {nftlist.map((token) => {
         return (
-          <form className={Mystyles.todoNFTShowtemplate}>
+          <form className={Mystyles.todoNFTShowtemplate} key= "">
             <div className="card mb-3">
               <h3 className="card-header">{ token.FireBaseDB ? token.name + " GameNFT" : token.name}</h3>
               <div className="card-body">
