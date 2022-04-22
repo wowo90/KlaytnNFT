@@ -16,7 +16,7 @@ const PinataSecretApiKey = "c9a7120e9fdf70a226e1e1c7415dce35dc8fd2da007c06b55930
 
 
 
-export default function createNFT({ caver, newKip17addr }) {
+export default function CreateNFT({ caver, newKip17addr }) {
   const [fileUrl, updateFileUrl] = useState('');
   const [isMint, setIsMint] = useState(false);
   const [image, setImage] = useState(null);
@@ -155,7 +155,7 @@ export default function createNFT({ caver, newKip17addr }) {
           </div>
           <br></br>
           <div className="form-group row">
-            <label for="exampleInputEmail1" className="col-sm-2 col-form-label">이  름</label>
+            <label htmlFor="exampleInputEmail1" className="col-sm-2 col-form-label">이  름</label>
             <div className="col-sm-10">
               <input type="name" className="form-control" id="NFT_Name"  onChange={onNameChange} placeholder="name" />            
               {/* <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> */}
@@ -163,7 +163,7 @@ export default function createNFT({ caver, newKip17addr }) {
           </div>          
 
           <div className="form-group">
-            <label for="exampleTextarea" className="form-label mt-4">설  명</label>
+            <label htmlFor="exampleTextarea" className="form-label mt-4">설  명</label>
             <textarea className="form-control" id="exampleTextarea" onChange={onDescriptionChange}  rows="3"></textarea>
           </div>
         </fieldset>

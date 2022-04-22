@@ -4,7 +4,7 @@ import kip17Abi from "../../src/kip17Abi";
 import Mystyles from "../../styles/mynft.module.css";
 import FireBaseInit from '../FireBase/FireBaseInit';
 
-const mynft = ({ caver, newKip17addr }) => {
+const Mynft = ({ caver, newKip17addr }) => {
   const [nftlist, setNftlist] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -17,7 +17,7 @@ const mynft = ({ caver, newKip17addr }) => {
 
 
   useEffect(async () => {
-    saveMyToken()
+    SaveMyToken()
   }, []);
 
   const FireBaseNFTData = (name) => {
@@ -78,7 +78,7 @@ const mynft = ({ caver, newKip17addr }) => {
     */
   }
 
-  const saveMyToken = async () => {
+  const SaveMyToken = async () => {
     const tokenContract = "";
     /*
     if (walletType === "eth") {
@@ -133,7 +133,7 @@ const mynft = ({ caver, newKip17addr }) => {
           FireBaseDB = false;          
 
           setNftlist((prevState) => {
-            return [...prevState, {Index, name, symbol, tokenId, tokenURI, JsonURL, JsonName, JsonDescription, FireBaseDB }];
+            return [...prevState, {name, symbol, tokenId, JsonURL, JsonName, JsonDescription, FireBaseDB }];
           });
           FireBaseNFTData(JsonName.toString());          
         }
@@ -161,7 +161,7 @@ const mynft = ({ caver, newKip17addr }) => {
               </div>
 
               <ul className="list-group list-group-flush">
-                <li className="list-group-item">이름 : {token.JsonName} </li>
+                <li className="list-group-item">이름 : {token.JsonName + "  " + token.tokenId} </li>
                 <li className="list-group-item">심볼 : {token.symbol}</li>
                 <li className="list-group-item">설명 : {token.JsonDescription}</li>
               </ul>

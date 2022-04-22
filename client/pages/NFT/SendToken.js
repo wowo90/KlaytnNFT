@@ -1,3 +1,4 @@
+/*
 import React, { useState, useEffect } from 'react';
 
 const router = useRouter();
@@ -16,7 +17,7 @@ useEffect(async () => {
   setToken({ name, symbol, id, tokenURI });
 }, []);
 
-const sendToken = async (tokenId) => {
+const SendToken = async (tokenId) => {
   const tokenContract = "";
   if (walletType === "eth") {
     tokenContract = await new web3.eth.Contract(erc721Abi, newErc721addr, {
@@ -49,6 +50,7 @@ const sendToken = async (tokenId) => {
         });
   }
 };
+*/
 
 //내 지갑에 있는 NFT를 다른 계정(지갑)으로 전송하는 법
 /*
