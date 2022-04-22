@@ -41,7 +41,7 @@ const mynft = ({ caver, newKip17addr }) => {
         const findIndex = nftlist.findIndex(element => element.JsonName == name );
 
         console.log("1. Count : " + nftlist.length  + "  findIndex : " + findIndex + "  Name : " + name);
-        nftlist[1].FireBaseDB = true;
+        nftlist[findIndex].FireBaseDB = true;
         setNftlist(nftlist);
       }
     });
