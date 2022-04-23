@@ -13,7 +13,7 @@ const LoginModal = ({ show, onHide }) => {
     const version = await window.klaytn.networkVersion;
     const selectedId = await window.klaytn.selectedAddress;
 
-    if (selectedId !== 'undefined') 
+    if (selectedId != 'undefined') 
     {
       
 
