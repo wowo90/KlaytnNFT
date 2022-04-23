@@ -51,8 +51,7 @@ export default function CreateNFT({ caver, newKip17addr }) {
 
   const onChange = async (e) => 
   {   
-    
-    /*//임시로막아두자! 
+    /*//임시로 막아둠
     const file = e.target.files[0];
     const createURL = URL.createObjectURL(file);
 

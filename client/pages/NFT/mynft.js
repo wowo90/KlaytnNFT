@@ -8,7 +8,6 @@ const Mynft = ({ caver, newKip17addr }) => {
   const [nftlist, setNftlist] = useState([]);  
   const [GameNFTlist, setGameNFTlist] = useState([]);
   const [Showlist, setShowlist] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [isGameNFT, setGameNFT] = useState(false);
 
   //Firebase Database 
@@ -23,30 +22,6 @@ const Mynft = ({ caver, newKip17addr }) => {
     SaveMyToken();
     
   }, []);
-
-  /*
-  const FireBaseNFTData = (name, symbol, tokenId, JsonURL, JsonName, JsonDescription) => {
-      
-    console.log("Firebase : " + name +"  "+ symbol+"  "+ tokenId+"  "+ JsonURL+"  "+ JsonName+"  "+ JsonDescription);
-    const NFTItem = FireBaseInit.collection("NFT_ITEM");
-
-    NFTItem.doc(JsonName).get().then((doc) => {
-      if(doc.exists)
-      { 
-        // document의 데이터를 가져옴
-        console.log(doc.data());
-        console.log("파이어베이스 이제 들어옴");
-
-        const findIndex = nftlist.findIndex(element => element.JsonName == JsonName);
-
-        const FireBaseDB = true;
-        setGameNFTlist((prevState) => {
-          return [...prevState, {name, symbol, tokenId, JsonURL, JsonName, JsonDescription, FireBaseDB }];
-        });        
-      }
-    });
-  }
-  */
 
   const SettingGameNFT = (isOK) =>
   {
@@ -128,29 +103,26 @@ const Mynft = ({ caver, newKip17addr }) => {
 
         setNftlist((prevState) => {
           return [...prevState, {name, symbol, tokenId, JsonURL, JsonName, JsonDescription, FireBaseDB }];
-        });   
+        });
 
         setShowlist((prevState) => {
           return [...prevState, {name, symbol, tokenId, JsonURL, JsonName, JsonDescription, FireBaseDB }];
-        });           
+        });
       }
     }
 
-    setIsLoading(false);
   };
 
   return (
     <div>
       <MainTitle />
-
-
-      <div> 
-      <button type="button" class="btn btn-outline-dark" onClick = {() => {SettingGameNFT(false)}}>ALL NFT</button>
-      <button type="button" class="btn btn-outline-dark" onClick = {() => {SettingGameNFT(true)}}>Game NFT</button>
+      <div>
+      <button type="button" className="btn btn-outline-dark" onClick = {() => {SettingGameNFT(false)}}>ALL NFT</button>
+      <button type="button" className="btn btn-outline-dark" onClick = {() => {SettingGameNFT(true)}}>Game NFT</button>
       </div>
       {Showlist.map((token) => {
         return (
-          <form className={Mystyles.todoNFTShowtemplate}> 
+          <form className={Mystyles.todoNFTShowtemplate} key={token.id}> 
             <div className="card mb-3">
               <h3 className="card-header">{ token.FireBaseDB ? token.name + " GameNFT" : token.name}</h3>
               <div className="card-body">
