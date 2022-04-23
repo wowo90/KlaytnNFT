@@ -14,9 +14,7 @@ const LoginModal = ({ show, onHide }) => {
     const selectedId = await window.klaytn.selectedAddress;
 
     if (selectedId != 'undefined') 
-    {
-      
-
+    {     
       console.log("Version :" + version);
       console.log("ID : " + selectedId);
       SetAddress(selectedId);
