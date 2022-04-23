@@ -143,7 +143,7 @@ const Mynft = ({ caver, newKip17addr }) => {
     <div>
       <MainTitle />
 
-{/*
+
       <div> 
       <button type="button" class="btn btn-outline-dark" onClick = {() => {SettingGameNFT(false)}}>ALL NFT</button>
       <button type="button" class="btn btn-outline-dark" onClick = {() => {SettingGameNFT(true)}}>Game NFT</button>
@@ -170,7 +170,6 @@ const Mynft = ({ caver, newKip17addr }) => {
           </form>
         );
       })}
-*/}      
     </div>
   );
 
