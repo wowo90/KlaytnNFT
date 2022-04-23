@@ -19,7 +19,7 @@ const Mynft = ({ caver, newKip17addr }) => {
 
   useEffect(async () => {
     console.log("UseEffect On");
-    SaveMyToken();
+    //SaveMyToken();
     
   }, []);
 
