@@ -17,8 +17,6 @@ const Mynft = ({ caver, newKip17addr }) => {
     GameItemValue: -1,
     Token: -1
   });
-
-
   //useEffect((() => {
   useEffect(() => {
     //SaveMyToken();
