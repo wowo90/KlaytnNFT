@@ -3,7 +3,7 @@ import MainTitle from "../MainTitle";
 import kip17Abi from "../../components/kip17Abi";
 import Mystyles from "../../styles/mynft.module.css";
 import FireBaseInit from '../../components/FireBaseInit';
-import nextImage from 'next/image';
+import NextImage from 'next/image';
 
 
 const Mynft = ({ caver, newKip17addr }) => {
@@ -21,7 +21,7 @@ const Mynft = ({ caver, newKip17addr }) => {
 
 
   //useEffect((() => {
-  useEffect((SaveMyToken = SaveMyToken) => {
+  useEffect(() => {
     SaveMyToken();
     
   }, []);
@@ -45,6 +45,7 @@ const Mynft = ({ caver, newKip17addr }) => {
       tokenContract = await new caver.klay.Contract(kip17Abi, newKip17addr);
     }
     */
+   /*
     const account = window.sessionStorage.getItem('ID');
 
     console.log("NFT : " + newKip17addr);
@@ -113,12 +114,14 @@ const Mynft = ({ caver, newKip17addr }) => {
         });
       }
     }
+    */
 
   };
 
   return (
     <div>
       <MainTitle />
+      {/*
       <div>
       <button type="button" className="btn btn-outline-dark" onClick = {() => {SettingGameNFT(false)}}>ALL NFT</button>
       <button type="button" className="btn btn-outline-dark" onClick = {() => {SettingGameNFT(true)}}>Game NFT</button>
@@ -129,7 +132,7 @@ const Mynft = ({ caver, newKip17addr }) => {
             <div className="card mb-3">
               <h3 className="card-header">{ token.FireBaseDB ? token.name + " GameNFT" : token.name}</h3>
               <div className="card-body">
-                <nextImage
+                <img
                   src={token.JsonURL}
                   alt={token.id}
                   style={{ width: "100%", height: "80%", objectFit: "cover", borderTopLeftRadius: "inherit", borderTopRightRadius: "inherit", margin: "0.1px" }}
@@ -144,7 +147,7 @@ const Mynft = ({ caver, newKip17addr }) => {
             </div>
           </form>
         );
-      })}
+      })}*/}
     </div>
   );
 

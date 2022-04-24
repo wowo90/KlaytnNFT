@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "react-bootstrap";
 import MainTitle from "../MainTitle";
-import nextImage from 'next/image';
+import Image from 'next/image';
 
 import Mystyles from "../../styles/mynft.module.css";
 
@@ -20,7 +20,7 @@ const PinataSecretApiKey = "c9a7120e9fdf70a226e1e1c7415dce35dc8fd2da007c06b55930
 export default function CreateNFT({ caver, newKip17addr }) {
   const [fileUrl, updateFileUrl] = useState('');
   const [isMint, setIsMint] = useState(false);
-  const [image, setImage] = useState(null);
+  const [Inputimage, setInputImage] = useState(null);
 
   const [NFTName, setName] = useState('');
   const [NFTDescription, setDescription] = useState('');
@@ -52,12 +52,13 @@ export default function CreateNFT({ caver, newKip17addr }) {
 
   const onChange = async (e) => 
   {   
-    /*//임시로 막아둠
+    //임시로 막아둠
     const file = e.target.files[0];
     const createURL = URL.createObjectURL(file);
 
     console.log("file : " + JSON.stringify(file) + "  URL : " + createURL);
-   
+    setInputImage(createURL);
+    /*
     //const fs = require('fs');
     //const readableStreamForFile = fs.createReadStream(createURL);
     const readableStreamForFile = DataFile.CreateReadStreamData(createURL);
@@ -69,13 +70,14 @@ export default function CreateNFT({ caver, newKip17addr }) {
     {
         console.log("Result : " + result);
         const URL = "ipfs://" +  result.data.IpfsHash;
-        setImage(URL);
+        setInputImage(URL);
 
     }).catch((err) => 
     {
         console.log(err);
     });
     */
+    
     
     /*
     const client = create("https://ipfs.infura.io:5001/api/v0");
@@ -154,7 +156,7 @@ export default function CreateNFT({ caver, newKip17addr }) {
           <div className="form-group">
             {/*<label for="formFile" class="form-label mt-4">Default file input example</label> */}
             <input className="form-control" type="file" id="formFile" onChange={onChange} />
-            <nextImage htmlFor="fileInput" src={image} className={Mystyles.selectedImage} />
+            <img htmlFor="fileInput" src={Inputimage} className={Mystyles.selectedImage} />
           </div>
           <br></br>
           <div className="form-group row">
