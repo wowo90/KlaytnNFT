@@ -4,13 +4,15 @@ import kip17Abi from "../../components/kip17Abi";
 import Mystyles from "../../styles/mynft.module.css";
 import FireBaseInit from '../../components/FireBaseInit';
 
-export default function Mynft({ caver, newKip17addr }) {
+const Mynft = ({ caver, newKip17addr }) => {
   return (
     <div>
       <MainTitle />
     </div>
-  );
+  )
 }
+
+export default Mynft;
 
 /*
 export default function Mynft({ caver, newKip17addr }) {
