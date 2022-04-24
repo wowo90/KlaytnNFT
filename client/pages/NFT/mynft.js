@@ -5,7 +5,7 @@ import Mystyles from "../../styles/mynft.module.css";
 import FireBaseInit from '../../components/FireBaseInit';
 
 
-const Mynft = ({ caver, newKip17addr }) => {
+export default function Mynft({ caver, newKip17addr }) {
   const [nftlist, setNftlist] = useState([]);  
   const [GameNFTlist, setGameNFTlist] = useState([]);
   const [Showlist, setShowlist] = useState([]);
@@ -17,9 +17,10 @@ const Mynft = ({ caver, newKip17addr }) => {
     GameItemValue: -1,
     Token: -1
   });
+
   //useEffect((() => {
   useEffect(() => {
-    //SaveMyToken();
+    SaveMyToken();
     
   }, []);
   
@@ -33,7 +34,7 @@ const Mynft = ({ caver, newKip17addr }) => {
       
   }
 
-  const SaveMyToken = () =>{
+  const SaveMyToken = async () =>{
     const tokenContract = "";
     /*
     if (walletType === "eth") {
@@ -146,8 +147,6 @@ const Mynft = ({ caver, newKip17addr }) => {
   );
 
 }
-
-export default Mynft;
 
 /*
 import React, { useState, useEffect } from 'react';
