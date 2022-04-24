@@ -22,6 +22,17 @@ const MyNFTData = ({ caver, newKip17addr }) => {
     
   }, []);
 
+  const SettingGameNFT = (isOK) =>
+  {
+    setGameNFT(isOK);
+    if(isOK == true)
+      setShowlist(GameNFTlist);
+    else
+      setShowlist(nftlist);
+      
+  }
+
+
   const SaveMyToken = async () =>{
     const tokenContract = "";
     const account = window.sessionStorage.getItem('ID');
