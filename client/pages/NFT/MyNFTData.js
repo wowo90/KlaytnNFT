@@ -17,6 +17,11 @@ const MyNFTData = ({ caver, newKip17addr }) => {
     Token: -1
   });
 
+  useEffect(() => {
+    SaveMyToken();
+    
+  }, []);
+
   const SaveMyToken = async () =>{
     const tokenContract = "";
     const account = window.sessionStorage.getItem('ID');
@@ -94,9 +99,34 @@ const MyNFTData = ({ caver, newKip17addr }) => {
   return (
     <div>
       <MainTitle />
-    </div>
+      <div>
+      <button type="button" className="btn btn-outline-dark" onClick = {() => {SettingGameNFT(false)}}>ALL NFT</button>
+      <button type="button" className="btn btn-outline-dark" onClick = {() => {SettingGameNFT(true)}}>Game NFT</button>
+      </div>
+      {Showlist.map((token) => {
+        return (
+          <form className={Mystyles.todoNFTShowtemplate} key={token.id}> 
+            <div className="card mb-3">
+              <h3 className="card-header">{ token.FireBaseDB ? token.name + " GameNFT" : token.name}</h3>
+              <div className="card-body">
+                <img
+                  src={token.JsonURL}
+                  alt={token.id}
+                  style={{ width: "100%", height: "80%", objectFit: "cover", borderTopLeftRadius: "inherit", borderTopRightRadius: "inherit", margin: "0.1px" }}
+                />
+              </div>
 
-  )
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">이름 : {token.JsonName} </li>
+                <li className="list-group-item">심볼 : {token.symbol}</li>
+                <li className="list-group-item">설명 : {token.JsonDescription}</li>
+              </ul>
+            </div>
+          </form>
+        );
+      })}
+    </div>
+  );
 }
 
 export default MyNFTData;
