@@ -6,6 +6,7 @@ import FireBaseInit from '../../components/FireBaseInit';
 
 
 export default function Mynft({ caver, newKip17addr }) {
+
   const [nftlist, setNftlist] = useState([]);  
   const [GameNFTlist, setGameNFTlist] = useState([]);
   const [Showlist, setShowlist] = useState([]);
@@ -18,7 +19,7 @@ export default function Mynft({ caver, newKip17addr }) {
     Token: -1
   });
 
-  //useEffect((() => {
+  /*
   useEffect(() => {
     SaveMyToken();
     
@@ -36,13 +37,6 @@ export default function Mynft({ caver, newKip17addr }) {
 
   const SaveMyToken = async () =>{
     const tokenContract = "";
-    /*
-    if (walletType === "eth") {
-      tokenContract = await new web3.eth.Contract(erc721Abi, newErc721addr);
-    } else {
-      tokenContract = await new caver.klay.Contract(kip17Abi, newKip17addr);
-    }
-    */
     const account = window.sessionStorage.getItem('ID');
 
     console.log("NFT : " + newKip17addr);
@@ -113,6 +107,7 @@ export default function Mynft({ caver, newKip17addr }) {
     }
 
   };
+  */
 
   return (
     <div>
