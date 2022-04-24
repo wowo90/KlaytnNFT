@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import MainTitle from "../MainTitle";
 import kip17Abi from "../../components/kip17Abi";
-import Mystyles from "../../styles/mynft.module.css";
-import FireBaseInit from '../../components/FireBaseInit';
+//import Mystyles from "../../styles/mynft.module.css";
+//import FireBaseInit from '../../components/FireBaseInit';
 
 const Mynft = ({ caver, newKip17addr }) => {
   return (
     <div>
       <MainTitle />
     </div>
-    
+
   )
 }
 
