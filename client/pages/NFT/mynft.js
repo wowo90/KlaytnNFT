@@ -9,6 +9,7 @@ const Mynft = ({ caver, newKip17addr }) => {
     <div>
       <MainTitle />
     </div>
+    
   )
 }
 
