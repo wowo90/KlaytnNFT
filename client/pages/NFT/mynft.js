@@ -3,6 +3,8 @@ import MainTitle from "../MainTitle";
 import kip17Abi from "../../components/kip17Abi";
 import Mystyles from "../../styles/mynft.module.css";
 import FireBaseInit from '../../components/FireBaseInit';
+import nextImage from 'next/image';
+
 
 const Mynft = ({ caver, newKip17addr }) => {
   const [nftlist, setNftlist] = useState([]);  
@@ -17,12 +19,13 @@ const Mynft = ({ caver, newKip17addr }) => {
     Token: -1
   });
 
-  useEffect(async () => {
-    console.log("UseEffect On");
-    //SaveMyToken();
+
+  //useEffect((() => {
+  useEffect((SaveMyToken = SaveMyToken) => {
+    SaveMyToken();
     
   }, []);
-
+  
   const SettingGameNFT = (isOK) =>
   {
     setGameNFT(isOK);
@@ -126,7 +129,7 @@ const Mynft = ({ caver, newKip17addr }) => {
             <div className="card mb-3">
               <h3 className="card-header">{ token.FireBaseDB ? token.name + " GameNFT" : token.name}</h3>
               <div className="card-body">
-                <img
+                <nextImage
                   src={token.JsonURL}
                   alt={token.id}
                   style={{ width: "100%", height: "80%", objectFit: "cover", borderTopLeftRadius: "inherit", borderTopRightRadius: "inherit", margin: "0.1px" }}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "react-bootstrap";
 import MainTitle from "../MainTitle";
+import nextImage from 'next/image';
 
 import Mystyles from "../../styles/mynft.module.css";
 
@@ -153,7 +154,7 @@ export default function CreateNFT({ caver, newKip17addr }) {
           <div className="form-group">
             {/*<label for="formFile" class="form-label mt-4">Default file input example</label> */}
             <input className="form-control" type="file" id="formFile" onChange={onChange} />
-            <img htmlFor="fileInput" src={image} className={Mystyles.selectedImage} />
+            <nextImage htmlFor="fileInput" src={image} className={Mystyles.selectedImage} />
           </div>
           <br></br>
           <div className="form-group row">
