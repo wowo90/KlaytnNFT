@@ -4,7 +4,15 @@ import kip17Abi from "../../components/kip17Abi";
 import Mystyles from "../../styles/mynft.module.css";
 import FireBaseInit from '../../components/FireBaseInit';
 
+export default function Mynft({ caver, newKip17addr }) {
+  return (
+    <div>
+      <MainTitle />
+    </div>
+  );
+}
 
+/*
 export default function Mynft({ caver, newKip17addr }) {
 
   const [nftlist, setNftlist] = useState([]);  
@@ -19,7 +27,7 @@ export default function Mynft({ caver, newKip17addr }) {
     Token: -1
   });
 
-  /*
+  
   useEffect(() => {
     SaveMyToken();
     
@@ -107,7 +115,7 @@ export default function Mynft({ caver, newKip17addr }) {
     }
 
   };
-  */
+ 
 
   return (
     <div>
@@ -142,7 +150,7 @@ export default function Mynft({ caver, newKip17addr }) {
   );
 
 }
-
+ */
 /*
 import React, { useState, useEffect } from 'react';
 import MainTitle from "../MainTitle";
