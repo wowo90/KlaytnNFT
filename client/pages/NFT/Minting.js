@@ -7,15 +7,14 @@ import Mystyles from "../../styles/mynft.module.css";
 
 import FireBaseInit from '../../components/FireBaseInit';
 import pinataSDK from '@pinata/sdk';
-import * as DataFile from '../api/DataFile';
+//import DataFile from '../api/DataFile';
+import fs from 'fs'
 
 import { create } from "ipfs-http-client";
 import kip17Abi from "../../components/kip17Abi";
 
 const PinataApiKey = "5f18d53d45731d696c5c";
 const PinataSecretApiKey = "c9a7120e9fdf70a226e1e1c7415dce35dc8fd2da007c06b5593007042c729e00";
-
-
 
 export default function CreateNFT({ caver, newKip17addr }) {
   const [fileUrl, updateFileUrl] = useState('');
@@ -27,58 +26,61 @@ export default function CreateNFT({ caver, newKip17addr }) {
   const [NFTUrl, setNFTUrl] = useState('');
 
   const [DataInput, setDataInput] = useState(false);
-  const pinata = pinataSDK(PinataApiKey, PinataSecretApiKey);
-  
+  //const pinata = pinataSDK(PinataApiKey, PinataSecretApiKey);
+
   const MetaDataJson = {
     name: NFTName,
-    image: "ipfs://QmTFrS2FVZWoGhudpt7wCUqYjHfaXFSbuePF5GZRYHFsv7",
+    image: Inputimage,
     description: NFTDescription,
     external_url: '',
 
-  }; 
+  };
 
   const options = {
     pinataMetadata: {
-        name:NFTName,
-        keyvalues: {
-            customKey: 'customValue',
-            customKey2: 'customValue2'
-        }
+      name: NFTName,
+      keyvalues: {
+        customKey: 'customValue',
+        customKey2: 'customValue2'
+      }
     },
     pinataOptions: {
-        cidVersion: 0
+      cidVersion: 0
     }
-};
+  };
 
-  const onChange = async (e) => 
-  {   
-    //임시로 막아둠
+  /*
+  const fetchAPI = () => {
+    setApiResult("Loading...");
+    fetch("/api/image/")
+      .then((r) => r.json())
+      .then(setApiResult);
+  };
+  */
+
+  const onChange = async (e) => {
     const file = e.target.files[0];
     const createURL = URL.createObjectURL(file);
-
+    
     console.log("file : " + JSON.stringify(file) + "  URL : " + createURL);
-    setInputImage(createURL);
-    /*
-    //const fs = require('fs');
-    //const readableStreamForFile = fs.createReadStream(createURL);
+    const DataFile = require('../api/image/DataFile');        
     const readableStreamForFile = DataFile.CreateReadStreamData(createURL);
+    
+    setInputImage(createURL);
+    console.log("ReadData :  " + readableStreamForFile);
+    /*
+    //const readableStreamForFile = fs.createReadStream(createURL);
+    console.log("Stream : " + readableStreamForFile);
+    pinata.pinFileToIPFS(readableStreamForFile, options).then((result) => {
+      console.log("Result : " + result);
+      const URL = "ipfs://" + result.data.IpfsHash;
+      setInputImage(URL);
 
-    consol.log("Stream : " + readableStreamForFile);
-    //readablestream
-    //export default function pinFileToIPFS(pinataApiKey: string, pinataSecretApiKey: string, readStream: any, options: any): Promise<unknown>;
-    pinata.pinFileToIPFS(readableStreamForFile, options).then((result) => 
-    {
-        console.log("Result : " + result);
-        const URL = "ipfs://" +  result.data.IpfsHash;
-        setInputImage(URL);
-
-    }).catch((err) => 
-    {
-        console.log(err);
+    }).catch((err) => {
+      console.log(err);
     });
     */
-    
-    
+
     /*
     const client = create("https://ipfs.infura.io:5001/api/v0");
     try {
@@ -100,10 +102,9 @@ export default function CreateNFT({ caver, newKip17addr }) {
     setDescription(e.target.value);
   };
 
-  const createNewNFT = async () => 
-  {
+  const createNewNFT = async () => {
     console.log("NFTUrl :  " + NFTUrl);
-    
+
     let tokenContract;
     let newTokenId;
 
@@ -125,25 +126,24 @@ export default function CreateNFT({ caver, newKip17addr }) {
     const totalSupply = await tokenContract.methods.totalSupply().call();
 
     setIsMint(true);
-    console.log("NFTUrl : " + NFTUrl); 
-    
+    console.log("NFTUrl : " + NFTUrl);
+
   };
 
-  const MakeJsonFile = () => 
-  {
-      //json 파일을 피네타사이트에 넣기
-      pinata.pinJSONToIPFS(MetaDataJson, options).then((result) => {
-          //handle results here
-          console.log(result);
-          //setNFTUrl("ipfs://" +  result.data.IpfsHash);
-          setNFTUrl("ipfs://" +  result.IpfsHash);
-         
-          setDataInput(true);
-      }).catch((err) => {
-          //handle error here
-          console.log(err);
-          setDataInput(false);
-      });
+  const MakeJsonFile = () => {
+    //json 파일을 피네타사이트에 넣기
+    pinata.pinJSONToIPFS(MetaDataJson, options).then((result) => {
+      //handle results here
+      console.log(result);
+      //setNFTUrl("ipfs://" +  result.data.IpfsHash);
+      setNFTUrl("ipfs://" + result.IpfsHash);
+
+      setDataInput(true);
+    }).catch((err) => {
+      //handle error here
+      console.log(err);
+      setDataInput(false);
+    });
   }
 
   return (
@@ -162,20 +162,20 @@ export default function CreateNFT({ caver, newKip17addr }) {
           <div className="form-group row">
             <label htmlFor="exampleInputEmail1" className="col-sm-2 col-form-label">이  름</label>
             <div className="col-sm-10">
-              <input type="name" className="form-control" id="NFT_Name"  onChange={onNameChange} placeholder="name" />            
+              <input type="name" className="form-control" id="NFT_Name" onChange={onNameChange} placeholder="name" />
               {/* <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> */}
             </div>
-          </div>          
+          </div>
 
           <div className="form-group">
             <label htmlFor="exampleTextarea" className="form-label mt-4">설  명</label>
-            <textarea className="form-control" id="exampleTextarea" onChange={onDescriptionChange}  rows="3"></textarea>
+            <textarea className="form-control" id="exampleTextarea" onChange={onDescriptionChange} rows="3"></textarea>
           </div>
         </fieldset>
 
         <br></br>
         <Button size="big" content="Create Data" onClick={MakeJsonFile}>데이터 저장</Button>
-        <Button size="big" content="Create NFT" onClick={createNewNFT}>Minting</Button>        
+        <Button size="big" content="Create NFT" onClick={createNewNFT}>Minting</Button>
       </form>
     </div>
 
