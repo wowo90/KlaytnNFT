@@ -58,6 +58,9 @@ const MyNFTData = ({ caver, newKip17addr }) => {
 
     for (let tokenId of arr) {
       let tokenOwner = await tokenContract.methods.ownerOf(tokenId).call();
+      //let tokenAddress = await tokenContract.methods.tokenAddress(tokenId).call();
+      console.log("tokenOwner: " + tokenOwner);
+      
       if (String(tokenOwner).toLowerCase() === account) 
       {
         let tokenURI = await tokenContract.methods.tokenURI(tokenId).call();

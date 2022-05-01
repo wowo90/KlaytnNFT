@@ -8,6 +8,8 @@ import Mystyles from "../../styles/mynft.module.css";
 import FireBaseInit from '../../components/FireBaseInit';
 import pinataSDK from '@pinata/sdk';
 //import DataFile from '../api/DataFile';
+import FormData from 'form-data';
+import Axios from 'axios';
 import fs from 'fs'
 
 import { create } from "ipfs-http-client";
@@ -20,13 +22,15 @@ export default function CreateNFT({ caver, newKip17addr }) {
   const [fileUrl, updateFileUrl] = useState('');
   const [isMint, setIsMint] = useState(false);
   const [Inputimage, setInputImage] = useState(null);
+  const [Showimage, setShowImage] = useState(null);
+  const [FileName, SetFileName] = useState(null);
 
   const [NFTName, setName] = useState('');
   const [NFTDescription, setDescription] = useState('');
   const [NFTUrl, setNFTUrl] = useState('');
 
   const [DataInput, setDataInput] = useState(false);
-  //const pinata = pinataSDK(PinataApiKey, PinataSecretApiKey);
+  const pinata = pinataSDK(PinataApiKey, PinataSecretApiKey);
 
   const MetaDataJson = {
     name: NFTName,
@@ -61,13 +65,21 @@ export default function CreateNFT({ caver, newKip17addr }) {
   const onChange = async (e) => {
     const file = e.target.files[0];
     const createURL = URL.createObjectURL(file);
+
+    // get the hash
+    setShowImage(createURL);
+    SetFileName(file);
     
+
+    /*
     console.log("file : " + JSON.stringify(file) + "  URL : " + createURL);
     const DataFile = require('../api/image/DataFile');        
     const readableStreamForFile = DataFile.CreateReadStreamData(createURL);
+
     
     setInputImage(createURL);
     console.log("ReadData :  " + readableStreamForFile);
+    */
     /*
     //const readableStreamForFile = fs.createReadStream(createURL);
     console.log("Stream : " + readableStreamForFile);
@@ -130,7 +142,31 @@ export default function CreateNFT({ caver, newKip17addr }) {
 
   };
 
-  const MakeJsonFile = () => {
+  const MakeJsonFile = async () => {
+
+    const form = new FormData();
+    form.append("file", FileName);
+    const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
+
+    const response = await Axios.post(
+      url,
+      form,
+      {
+        maxContentLength: "Infinity",
+        headers: {
+          "Content-Type": `multipart/form-data;boundary=${form._boundary}`,
+          'pinata_api_key': PinataApiKey,
+          'pinata_secret_api_key': PinataSecretApiKey
+
+        }
+      }
+    )
+    console.log("respone : " + response.data.IpfsHash);
+    setInputImage(response.data.IpfsHash);
+    console.log("Inputimage : " + Inputimage);
+
+    MetaDataJson.image = "ipfs://" + response.data.IpfsHash;
+
     //json 파일을 피네타사이트에 넣기
     pinata.pinJSONToIPFS(MetaDataJson, options).then((result) => {
       //handle results here
@@ -156,7 +192,7 @@ export default function CreateNFT({ caver, newKip17addr }) {
           <div className="form-group">
             {/*<label for="formFile" class="form-label mt-4">Default file input example</label> */}
             <input className="form-control" type="file" id="formFile" onChange={onChange} />
-            <img htmlFor="fileInput" src={Inputimage} className={Mystyles.selectedImage} />
+            <img htmlFor="fileInput" src={Showimage} className={Mystyles.selectedImage} />
           </div>
           <br></br>
           <div className="form-group row">
