@@ -46,6 +46,8 @@ const MyNFTData = ({ caver, newKip17addr }) => {
     const symbol = await tokenContract.methods.symbol().call();
     const totalSupply = await tokenContract.methods.totalSupply().call();
 
+    const option = tokenContract.options;
+
     const JsonURL = '';
     const JsonName = '';
     const JsonDescription = '';
@@ -58,13 +60,19 @@ const MyNFTData = ({ caver, newKip17addr }) => {
 
     for (let tokenId of arr) {
       let tokenOwner = await tokenContract.methods.ownerOf(tokenId).call();
-      //let tokenAddress = await tokenContract.methods.tokenAddress(tokenId).call();
-      console.log("tokenOwner: " + tokenOwner);
+      //let blocknumber = await caver.rpc.klay.getBlockByNumber(tokenId);
+      //let blockhash = await caver.rpc.klay.getFilterLogs(account);
+      //console.log("blockhash : " + JSON.stringify(blockhash));
+      
+      //transaction.getTransactionHash()
+      //transaction.getSenderTxHash()
       
       if (String(tokenOwner).toLowerCase() === account) 
       {
         let tokenURI = await tokenContract.methods.tokenURI(tokenId).call();
         FireBaseDB = false;
+        console.log("tokenURI : " + tokenURI);
+        console.log("tokenURI2 : " + JSON.stringify(tokenURI));        
 
         if (tokenURI != '') 
         {
