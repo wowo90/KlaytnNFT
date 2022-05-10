@@ -5,11 +5,8 @@ import React, { useState, useEffect } from 'react';
 import Caver from "caver-js";
 
 function MyApp({ Component, pageProps }) {
-  const [newKip17addr, setNewKip17Addr] = useState("0xDa8472F5AEd5327dbf678385645f3e52f8E8f256");
+  const [newKip17addr, setNewKip17Addr] = useState("0x85106722f1895bdE84398076902975F914ef6717");
   const [caver, setCaver] = useState();
-
-  
-
 
   useEffect(() => {
     if (typeof klaytn !== "undefined") {

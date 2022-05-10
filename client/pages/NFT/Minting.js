@@ -15,8 +15,8 @@ import fs from 'fs'
 import { create } from "ipfs-http-client";
 import kip17Abi from "../../components/kip17Abi";
 
-const PinataApiKey = "5f18d53d45731d696c5c";
-const PinataSecretApiKey = "c9a7120e9fdf70a226e1e1c7415dce35dc8fd2da007c06b5593007042c729e00";
+const PinataApiKey = "4f31d7dbb5810f6e37be";
+const PinataSecretApiKey = "aa75590ac1823ed49f38e6c4b8be577d9dc5624640997f11a2a01223a7b0c608";
 
 export default function CreateNFT({ caver, newKip17addr }) {
   const [fileUrl, updateFileUrl] = useState('');
@@ -173,8 +173,24 @@ export default function CreateNFT({ caver, newKip17addr }) {
       console.log(result);
       //setNFTUrl("ipfs://" +  result.data.IpfsHash);
       setNFTUrl("ipfs://" + result.IpfsHash);
-
       setDataInput(true);
+
+      let tokenContract;
+      let newTokenId;
+  
+      const account = window.sessionStorage.getItem('ID');
+  
+      tokenContract = new caver.klay.Contract(kip17Abi, newKip17addr, {
+        from: account,
+      });
+  
+      tokenContract.options.address = newKip17addr;
+      newTokenId = tokenContract.methods.mintNFT(account, "ipfs://" + result.IpfsHash).send(
+        {
+          from: account,
+          gas: '850000'
+        });
+
     }).catch((err) => {
       //handle error here
       console.log(err);
@@ -210,8 +226,7 @@ export default function CreateNFT({ caver, newKip17addr }) {
         </fieldset>
 
         <br></br>
-        <Button size="big" content="Create Data" onClick={MakeJsonFile}>데이터 저장</Button>
-        <Button size="big" content="Create NFT" onClick={createNewNFT}>Minting</Button>
+        <Button size="big" content="Create Data" onClick={MakeJsonFile}>Minting</Button>
       </form>
     </div>
 

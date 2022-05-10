@@ -72,11 +72,14 @@ const MyNFTData = ({ caver, newKip17addr }) => {
         let tokenURI = await tokenContract.methods.tokenURI(tokenId).call();
         FireBaseDB = false;
         console.log("tokenURI : " + tokenURI);
-        console.log("tokenURI2 : " + JSON.stringify(tokenURI));        
-
-        if (tokenURI != '') 
+        
+        const URL = tokenURI.substring(0,7);
+        if (URL == "ipfs://")
         {
-          const MetaDataJson = tokenURI.replace("ipfs://", "https://ipfs.io/ipfs/");
+          const MetaDataJson = tokenURI.replace("ipfs://", "https://gateway.pinata.cloud/ipfs/");
+
+          //const config = { headers : { 'Accept' : 'application/json'}};
+          //const GetJson = await fetch(MetaDataJson,config);
           const GetJson = await fetch(MetaDataJson);
 
           const jsonFile = await GetJson.json();
@@ -86,7 +89,7 @@ const MyNFTData = ({ caver, newKip17addr }) => {
 
           JsonDescription = jsonFile.description;
           const Image = jsonFile.image;
-          JsonURL = Image.replace("ipfs://", "https://ipfs.io/ipfs/");
+          JsonURL = Image.replace("ipfs://", "https://gateway.ipfs.io/ipfs/");
           console.log("JsonURL : " + JsonURL);
 
           //FireBaseNFTData(name, symbol, tokenId, JsonURL, JsonName, JsonDescription);
@@ -103,6 +106,10 @@ const MyNFTData = ({ caver, newKip17addr }) => {
               });        
             }
           });
+        }
+        else
+        {
+          JsonName = tokenURI;
         }
 
         setNftlist((prevState) => {
@@ -140,6 +147,7 @@ const MyNFTData = ({ caver, newKip17addr }) => {
 
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">이름 : {token.JsonName} </li>
+                <li className="list-group-item">ID : {token.tokenId} </li>
                 <li className="list-group-item">심볼 : {token.symbol}</li>
                 <li className="list-group-item">설명 : {token.JsonDescription}</li>
               </ul>
